@@ -2,7 +2,7 @@ import tkinter as tk
 import geocoder
 from forecastiopy import *
 apikey = 'e189b55a5cea6512bed42aca3e9e3aa4'
-
+tempdata = []
 
 
 def geocode():
@@ -35,13 +35,29 @@ def geocode():
         print('Summary:', hourly.summary)
         print('Icon:', hourly.icon)
 
+        # for hour in range(0, hourly.hours()):
+        #     print('Hour', hour + 1)
+        #
+        #     for item in hourly.get_hour(hour).keys():
+        #         print(item + ' : ' + str(hourly.get_hour(hour)[item]))
+        #      #Or access attributes directly for a given minute.
+        #      #hourly.hour_5_time would also work
+        # print(hourly.hour_49_temperature)
+
         for hour in range(0, hourly.hours()):
+
             print('Hour', hour + 1)
-            for item in hourly.get_hour(hour).keys():
-                print(item + ' : ' + str(hourly.get_hour(hour)[item]))
-             Or access attributes directly for a given minute.
-             hourly.hour_5_time would also work
+            print('Temperature:' + str(hourly.get_hour(hour)['temperature']))
+            tempdata.append(str(hourly.get_hour(hour)['temperature']))
+             #Or access attributes directly for a given minute.
+             #hourly.hour_5_time would also work
+
         print(hourly.hour_49_time)
+        for x in tempdata:
+            print(x)
+
+
+
     else:
         print('No Hourly data')
 

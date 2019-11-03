@@ -3,6 +3,7 @@ import geocoder
 from forecastiopy import *
 apikey = 'e189b55a5cea6512bed42aca3e9e3aa4'
 tempdata = []
+dayindex = []
 
 
 def geocode():
@@ -55,22 +56,38 @@ def geocode():
         print(hourly.hour_49_time)
         for x in tempdata:
             print(x)
+        indexcalc()
 
 
 
     else:
         print('No Hourly data')
 
+def indexcalc():
+    for x in tempdata:
+        if x <= e3.get():
+            dayindex.append(tempdata.index(x))
+    for x in dayindex:
+        print(x)
+
+
+
+
+
 
 master = tk.Tk()
 tk.Label(master, text="City").grid(row=0)
 tk.Label(master, text="State").grid(row=1)
+tk.Label(master, text="I don't want to run in higher than __ degrees").grid(row=2)
 
 e1 = tk.Entry(master)
 e2 = tk.Entry(master)
+e3 = tk.Entry(master)
 
 e1.grid(row=0, column=1)
 e2.grid(row=1, column=1)
+e3.grid(row=2, column=1)
+
 
 tk.Button(master,
           text='Show Coordinates', command=geocode).grid(row=3,
